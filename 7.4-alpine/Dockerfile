@@ -2,7 +2,9 @@ FROM php:7.4-fpm-alpine
 
 COPY ./bin/docker-php-ext-get /usr/local/bin/
 
-RUN apk add --no-cache openssl-dev libstdc++ supervisor composer &&\
+COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+
+RUN apk add --no-cache openssl-dev libstdc++ supervisor &&\
     docker-php-source extract &&\
     docker-php-ext-get igbinary 3.1.2 &&\
     docker-php-ext-install pdo_mysql igbinary &&\
