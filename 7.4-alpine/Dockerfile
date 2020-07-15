@@ -4,7 +4,7 @@ COPY ./bin/docker-php-ext-get /usr/local/bin/
 
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
-RUN apk add --no-cache openssl-dev libstdc++ supervisor &&\
+RUN apk add --no-cache openssl-dev libstdc++ supervisor git &&\
     docker-php-source extract &&\
     docker-php-ext-get igbinary 3.1.2 &&\
     docker-php-ext-install pdo_mysql igbinary &&\
