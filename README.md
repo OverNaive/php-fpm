@@ -10,6 +10,8 @@
 
 `docker-php-ext-get` 来自于文章： [Build Docker images with PECL packages without using the PECL command](https://olvlvl.com/2019-06-docker-pecl-without-pecl)
 
+Update: 不指定扩展版本时，默认使用最新版本。
+
 ## 安装的软件
 
 `openssl-dev`
@@ -26,11 +28,11 @@
 
 `pdo_mysql`
 
-`igbinary 3.1.2`
+`igbinary`
 
-`redis 5.2.2 --enable-redis-igbinary`
+`redis --enable-redis-igbinary`
 
-`swoole 4.5.2 --enable-openssl=yes`
+`swoole --enable-openssl=yes`
 
 ## 镜像地址
 
