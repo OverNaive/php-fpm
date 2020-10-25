@@ -2,6 +2,7 @@
 set -e
 
 dir=/usr/src/php
+uri=https://pecl.php.net/get/
 
 if [ ! -f "$dir/.docker-extracted" ]; then
     echo >&2 "error: PHP source required, run 'docker-php-source extract' first"
@@ -11,8 +12,8 @@ fi
 dir="$dir/ext"
 
 usage() {
-    echo "usage: $0 module-name module-version"
-    echo "   ie: $0 redis 4.3.0"
+    echo "usage: $0 module-name ｜ module-name module-version"
+    echo "   ie: $0 swoole | swoole 4.5.5"
 }
 
 name=$1
@@ -24,9 +25,10 @@ if [ -z "$name" ]; then
 fi
 
 if [ -z "$version" ]; then
-    usage >&2
-    exit 1
+    file=$name;
+else
+    file=$name-$version.tgz
 fi
 
 mkdir -p "$dir/$name"
-curl -fsSL "https://pecl.php.net/get/$name-$version.tgz" | tar xvz -C "$dir/$name" --strip 1
+curl -fsSL "$uri$file" | tar xvz -C "$dir/$name" --strip 1
